@@ -1,0 +1,152 @@
+//Mon 29/6/20 Todolist project to connect with Monogoose
+
+// Step 1 // shell 3
+user@Michael-MacBook-Pro-15 todolist-v2-starting-files % npm i
+npm WARN todolist-v1@1.0.0 No description
+npm WARN todolist-v1@1.0.0 No repository field.
+
+added 59 packages from 50 contributors and audited 59 packages in 2.943s
+found 0 vulnerabilities
+
+user@Michael-MacBook-Pro-15 todolist-v2-starting-files %
+
+step 2
+user@Michael-MacBook-Pro-15 todolist-v2-starting-files % npm i mongoose
+
+
+// Step 3
+app.js see notes in app( steps 1-7)
+require mongoose see no
+
+//step 4 in hyper
+open shell 1 for mongod server  to run. (mongod --dbpath ~/data/db)
+
+//shell 3 see top for
+run node app.js
+
+open shell 2
+run mongo
+
+---
+> show dbs
+admin       0.000GB
+config      0.000GB
+fruitsDB    0.000GB
+local       0.000GB
+shopDB      0.000GB
+todolistDB  0.000GB
+>> use todolistDB
+switched to db todolistDB
+> show collections
+items
+> > db.items.find()
+{ "_id" : ObjectId("5efa2e93fbab7ce72c001e57"), "name" : "Welcome to your new todolist!", "__v" : 0 }
+{ "_id" : ObjectId("5efa2e93fbab7ce72c001e58"), "name" : "Hit the + button to add a new item.", "__v" : 0 }
+{ "_id" : ObjectId("5efa2e93fbab7ce72c001e59"), "name" : "<-- Hit this to delete an item!.", "__v" : 0 }
+>
+
+
+
+// Friday 3/7/20.. L-368 to L-369 note in app.js
+> db.lists.drop() // after dropping ( go back to local host and refresh to add the(todolistDB) list back to database)
+true
+> db.lists.find()
+> show dbs
+admin       0.000GB
+config      0.000GB
+fruitsDB    0.000GB
+local       0.000GB
+shopDB      0.000GB
+todolistDB  0.000GB
+> use todolistDB
+switched to db todolistDB
+> show collections
+items
+lists
+> db.lists.find()
+
+
+
+
+Setting up MongoDB Atlas *( see my handwriting notes)
+hyper
+user@Michael-MacBook-Pro-15 ~ % mongo --version
+MongoDB shell version v4.2.7
+git version: 51d9fe12b5d19720e72dcd7db0f2f17dd9a19212
+allocator: system
+modules: none
+build environment:
+    distarch: x86_64
+    target_arch: x86_64
+user@Michael-MacBook-Pro-15 ~ % mongo "mongodb+srv://cluster0.e4dyr.mongodb.net/<dbname>" --username admin-michaeloha
+MongoDB shell version v4.2.7
+Enter password:
+connecting to: mongodb://cluster0-shard-00-01.e4dyr.mongodb.net:27017,cluster0-shard-00-02.e4dyr.mongodb.net:27017,cluster0-shard-00-00.e4dyr.mongodb.net:27017/%3Cdbname%3E?authSource=admin&compressors=disabled&gssapiServiceName=mongodb&replicaSet=atlas-qsk4xo-shard-0&ssl=true
+2020-07-06T17:18:27.806+0100 I  NETWORK  [js] Starting new replica set monitor for atlas-qsk4xo-shard-0/cluster0-shard-00-01.e4dyr.mongodb.net:27017,cluster0-shard-00-02.e4dyr.mongodb.net:27017,cluster0-shard-00-00.e4dyr.mongodb.net:27017
+2020-07-06T17:18:27.807+0100 I  CONNPOOL [ReplicaSetMonitor-TaskExecutor] Connecting to cluster0-shard-00-00.e4dyr.mongodb.net:27017
+2020-07-06T17:18:27.807+0100 I  CONNPOOL [ReplicaSetMonitor-TaskExecutor] Connecting to cluster0-shard-00-01.e4dyr.mongodb.net:27017
+2020-07-06T17:18:27.807+0100 I  CONNPOOL [ReplicaSetMonitor-TaskExecutor] Connecting to cluster0-shard-00-02.e4dyr.mongodb.net:27017
+2020-07-06T17:18:28.686+0100 I  NETWORK  [ReplicaSetMonitor-TaskExecutor] Confirmed replica set for atlas-qsk4xo-shard-0 is atlas-qsk4xo-shard-0/cluster0-shard-00-00.e4dyr.mongodb.net:27017,cluster0-shard-00-01.e4dyr.mongodb.net:27017,cluster0-shard-00-02.e4dyr.mongodb.net:27017
+Implicit session: session { "id" : UUID("092f4078-c9cc-41f1-bee9-0c005d9019b5") }
+MongoDB server version: 4.2.8
+MongoDB Enterprise atlas-qsk4xo-shard-0:PRIMARY> show dbs
+admin  0.000GB
+local  1.807GB
+MongoDB Enterprise atlas-qsk4xo-shard-0:PRIMARY> show dbs
+admin  0.000GB
+local  1.955GB
+test   0.000GB
+MongoDB Enterprise atlas-qsk4xo-shard-0:PRIMARY> use test
+switched to db test
+MongoDB Enterprise atlas-qsk4xo-shard-0:PRIMARY> show collections
+test
+MongoDB Enterprise atlas-qsk4xo-shard-0:PRIMARY> db.test.find()
+
+
+//L-375 deploying a database to Heroku
+Server started on port 3000
+^C%
+user@Michael-MacBook-Pro-15 todolist-v2-starting-files % git init
+Initialized empty Git repository in /Users/user/Desktop/todolist-v2-starting-files/.git/
+user@Michael-MacBook-Pro-15 todolist-v2-starting-files % git add .
+user@Michael-MacBook-Pro-15 todolist-v2-starting-files % git commit -m "Initial commit"
+user@Michael-MacBook-Pro-15 todolist-v2-starting-files % heroku login
+heroku: Press any key to open up the browser to login or q to exit:
+Opening browser to https://cli-auth.heroku.com/auth/cli/browser/9b5ab3e7-3197-46ee-97e5-a13635dd3452
+Logging in... done
+Logged in as michaeloha@yahoo.ca
+user@Michael-MacBook-Pro-15 todolist-v2-starting-files %
+
+Clear
+
+user@Michael-MacBook-Pro-15 todolist-v2-starting-files % heroku create
+Creating app... done, ⬢ tranquil-castle-89880
+https://tranquil-castle-89880.herokuapp.com/ | https://git.heroku.com/tranquil-castle-8988
+0.Git
+touch Procfile
+user@Michael-MacBook-Pro-15 todolist-v2-starting-files % open Procfile -a Atom
+user@Michael-MacBook-Pro-15 todolist-v2-starting-files % node --version
+v12.16.3
+user@Michael-MacBook-Pro-15 todolist-v2-starting-files % touch .gitignore
+user@Michael-MacBook-Pro-15 todolist-v2-starting-files % open .gitignore -a Atom
+user@Michael-MacBook-Pro-15 todolist-v2-starting-files % git add .
+user@Michael-MacBook-Pro-15 todolist-v2-starting-files % git commit -m "Add gitignore, procfile and update ports"
+[master f3a7ad9] Add gitignore, procfile and update ports
+ 5 files changed, 41 insertions(+), 2 deletions(-)
+ create mode 100644 .gitignore
+ create mode 100644 Procfile
+user@Michael-MacBook-Pro-15 todolist-v2-starting-files % git push heroku master
+remote: -----> Build succeeded!
+remote: -----> Discovering process types
+remote:        Procfile declares types -> web
+remote:
+remote: -----> Compressing...
+remote:        Done: 24.7M
+remote: -----> Launching...
+remote:        Released v3
+remote:        https://tranquil-castle-89880.herokuapp.com/ deployed to Heroku
+remote:
+remote: Verifying deploy... done.
+To https://git.heroku.com/tranquil-castle-89880.git
+ * [new branch]      master -> master
+user@Michael-MacBook-Pro-15 todolist-v2-starting-files % 
